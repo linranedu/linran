@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xixi_的个人空间</title>
+    <link rel="icon" type="image/png" href="icon/Image_1835175572756923.jpg">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f8f9fa;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --accent: #4fd1c5;
+            --secondary: #9f7aea;
+            --section-bg: #f0f4f8;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a202c;
+            --text-color: #e2e8f0;
+            --card-bg: #2d3748;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --accent: #76e4da;
+            --secondary: #b794f4;
+            --section-bg: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--bg-color);
+            font-weight: bold;
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            background: var(--section-bg);
+        }
+
+        .section:nth-child(even) {
+            background: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .interest-tag {
+            background: var(--accent);
+            color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .artwork-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .artwork-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .artwork-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .personality {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .personality-trait {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .game-section {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .artwork-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .artwork-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .artwork-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .artwork-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .more-artworks {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--accent);
+            color: var(--bg-color);
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .more-artworks:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .more-artworks span {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .artwork-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">切换主题</button>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="icon/Image_1835175572756923.jpg" alt="xixi_'s avatar" class="profile-img floating">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Hi! 我是 xixi_ 👋</h1>
+            <p style="font-size: 1.2rem; color: var(--accent);">15岁 | 游戏玩家 | 艺术爱好者</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">关于我</h2>
+            <div class="card">
+                <p style="text-align: center; font-size: 1.1rem;">
+                    一个15岁的小男孩，性格温柔友善，热爱交友。
+                    目前沉迷于音乐游戏 Phigros。
+                </p>
+                <div class="interests" style="margin-top: 2rem;">
+                    <span class="interest-tag">Phigros</span>
+                    <span class="interest-tag">音乐游戏</span>
+                    <span class="interest-tag">绘画</span>
+                    <span class="interest-tag">交友</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="game-section">
+        <div class="container">
+            <h2 style="margin-bottom: 2rem;">游戏生活</h2>
+            <div class="card" style="background: rgba(255,255,255,0.1); color: white;">
+                <h3 style="margin-bottom: 1rem;">Phigros</h3>
+                <p>
+                    作为一名 Phigros 玩家，我热爱音乐与节奏的完美结合。
+                    游戏不仅带给我快乐，更让我结识了许多志同道合的朋友。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">性格特点</h2>
+            <div class="personality">
+                <div class="card personality-trait">
+                    <h3 style="color: var(--accent);">温柔</h3>
+                    <p>待人友善，乐于助人</p>
+                </div>
+                <div class="card personality-trait">
+                    <h3 style="color: var(--accent);">可爱</h3>
+                    <p>活泼开朗，充满活力</p>
+                </div>
+                <div class="card personality-trait">
+                    <h3 style="color: var(--accent);">好交往</h3>
+                    <p>热爱交友，乐于分享</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">我的作品</h2>
+            <div class="artwork-grid">
+                <div class="artwork-item">
+                    <img src="p/1738986750956.jpg" alt="Artwork 1">
+                </div>
+                <div class="artwork-item">
+                    <img src="p/1738986753402.jpg" alt="Artwork 2">
+                </div>
+                <div class="artwork-item">
+                    <img src="p/1738986755596.jpg" alt="Artwork 3">
+                </div>
+                <a href="./gallery.html" class="artwork-item more-artworks">
+                    <span>查看更多作品</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+        }
+
+        if (!savedTheme) {
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.setAttribute('data-theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
