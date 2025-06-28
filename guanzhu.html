@@ -2,57 +2,86 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>关注我们 - 霜蓝</title>
   <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: 'Product Sans', sans-serif;
       background: #ffffff url('p/bg.png') no-repeat center center fixed;
       background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
       color: #1A1A1A;
-      text-align: center;
     }
+
     .container {
+      margin-top: 2rem;
       padding: 2rem;
+      width: 90%;
       max-width: 800px;
-      margin: 2rem auto;
       background: rgba(255,255,255,0.4);
       backdrop-filter: blur(10px);
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
     }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
     .logos {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 1rem;
-      margin-top: 2rem;
       justify-items: center;
+      margin-top: 2rem;
     }
+
+    .logos div {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
     .logos img {
       width: 60px;
       height: 60px;
       display: block;
       margin: 0 auto 0.5rem;
     }
-    .logos div {
-      font-size: 0.9rem;
-    }
+
     .back {
       display: inline-block;
       margin-top: 2rem;
-      padding: 0.6rem 1.2rem;
+      padding: 0.8rem 1.5rem;
       background: linear-gradient(to right, #71f8fc, #a0fff8);
       border-radius: 30px;
       text-decoration: none;
       color: black;
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-size: 1.1rem;
     }
+
     footer {
-      margin-top: 3rem;
-      font-size: 0.85rem;
+      margin: 2rem 0 1rem;
+      font-size: 0.9rem;
       color: #000;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.6rem; }
+      p { font-size: 1rem; }
     }
   </style>
 </head>
@@ -68,7 +97,7 @@
       <div><img src="p/x.png"><div>X</div></div>
       <div><img src="p/xhs.png"><div>小红书</div></div>
     </div>
-    <br><a href="index.html" class="back">← 返回主页</a>
+    <a href="index.html" class="back">← 返回主页</a>
   </div>
   <footer>Copyright©️2024-2025霜蓝, All Rights Reserved.</footer>
 </body>
