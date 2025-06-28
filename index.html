@@ -10,6 +10,10 @@
       --theme-color: #71f8fc;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Product Sans', sans-serif;
@@ -30,12 +34,21 @@
     }
 
     .hero img {
-      width: 160px;
-      height: 160px;
+      width: 40vw;
+      max-width: 160px;
+      height: auto;
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 1rem;
       box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
     }
 
     .buttons {
@@ -44,7 +57,7 @@
       align-items: center;
       gap: 1rem;
       margin: 2rem auto;
-      width: 80%;
+      width: 90%;
       max-width: 400px;
     }
 
@@ -70,6 +83,12 @@
       margin-top: 3rem;
       font-size: 0.85rem;
       color: #000;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      p { font-size: 0.95rem; }
+      .buttons a { font-size: 1rem; padding: 0.7rem 1.2rem; }
     }
   </style>
 </head>
