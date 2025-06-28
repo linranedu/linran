@@ -1,50 +1,71 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8">
-  <title>留言评论 - 霜蓝</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>评论留言 - 霜蓝</title>
+  <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
+
     body {
-      font-family: sans-serif;
-      background: linear-gradient(to right, #71f8fc, #cbf1ff), url('p/bg.png') no-repeat center center fixed;
+      margin: 0;
+      font-family: 'Product Sans', sans-serif;
+      background: #ffffff url('p/bg.png') no-repeat center center fixed;
       background-size: cover;
-      text-align: center;
-      padding: 2rem;
-      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #1A1A1A;
+      min-height: 100vh;
     }
+
     .container {
-      max-width: 900px;
-      margin: auto;
-      background: rgba(0,0,0,0.5);
+      margin-top: 2rem;
       padding: 2rem;
-      border-radius: 12px;
+      width: 90%;
+      max-width: 720px;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
     }
+
     h1 {
       font-size: 2rem;
+      margin-bottom: 1rem;
     }
+
     .back {
-      margin-top: 2rem;
       display: inline-block;
-      background: #ffffffaa;
-      color: #000;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(to right, #71f8fc, #a0fff8);
+      border-radius: 30px;
       text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-size: 1.1rem;
     }
+
     footer {
-      margin-top: 3rem;
-      font-size: 0.85rem;
-      color: #eee;
+      margin: 2rem 0 1rem;
+      font-size: 0.9rem;
+      color: #000;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.6rem; }
+      .back { font-size: 1rem; padding: 0.7rem 1.2rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>欢迎留言</h1>
-    <p>欢迎在下方评论区留言，与霜蓝互动交流！</p>
-    <div id="comments">
-      
-<script src="https://giscus.app/client.js"
+    <h1>评论留言</h1>
+    <!-- Giscus 评论系统嵌入 -->
+    <script src="https://giscus.app/client.js"
         data-repo="ikun-1145/xixi"
         data-repo-id="R_kgDON2L-Ag"
         data-category="Announcements"
@@ -58,9 +79,7 @@
         data-lang="zh-CN"
         crossorigin="anonymous"
         async>
-</script>
-
-    </div>
+    </script>
     <a href="index.html" class="back">← 返回主页</a>
   </div>
   <footer>Copyright©️2024-2025霜蓝, All Rights Reserved.</footer>
