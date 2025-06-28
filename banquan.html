@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>版权信息 - 霜蓝</title>
   <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
@@ -11,8 +11,7 @@
     body {
       margin: 0;
       font-family: 'Product Sans', sans-serif;
-      background: #ffffff url('p/bg.png') no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(135deg, #e0faff, #ffffff), url('p/bg.png') center center / cover no-repeat fixed;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -25,11 +24,17 @@
       padding: 2rem;
       width: 90%;
       max-width: 720px;
-      background: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.5);
       backdrop-filter: blur(10px);
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
@@ -50,8 +55,8 @@
     }
 
     .back {
-      display: inline-block;
       margin-top: 2rem;
+      display: inline-block;
       padding: 0.8rem 1.5rem;
       background: linear-gradient(to right, #71f8fc, #a0fff8);
       border-radius: 30px;
@@ -59,18 +64,17 @@
       color: black;
       font-weight: bold;
       font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .back:hover {
+      transform: translateY(-3px);
     }
 
     footer {
       margin: 2rem 0 1rem;
       font-size: 0.9rem;
       color: #000;
-    }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 1.6rem; }
-      p { font-size: 1rem; }
-      .back { font-size: 1rem; padding: 0.7rem 1.2rem; }
     }
   </style>
 </head>
