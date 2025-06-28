@@ -2,48 +2,54 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
-  <title>联系霜蓝</title>
+  <title>联系我们 - 霜蓝</title>
+  <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: sans-serif;
-      background: linear-gradient(to top left, #71f8fc, #daf7ff), url('p/bg.png') no-repeat center center fixed;
+      margin: 0;
+      font-family: 'Product Sans', sans-serif;
+      background: #ffffff url('p/bg.png') no-repeat center center fixed;
       background-size: cover;
+      color: #1A1A1A;
       text-align: center;
-      padding: 5rem 1rem 3rem;
-      color: #fff;
     }
-    .info {
-      background: rgba(0,0,0,0.5);
+    .container {
       padding: 2rem;
-      border-radius: 12px;
-      display: inline-block;
-      min-width: 300px;
+      max-width: 800px;
+      margin: 2rem auto;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
-    .info p {
-      font-size: 1.5rem;
-      margin: 1rem 0;
+    .email {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 2rem auto;
     }
-    a.back {
+    .back {
       display: inline-block;
       margin-top: 2rem;
-      background: #ffffffaa;
-      color: #000;
       padding: 0.6rem 1.2rem;
-      border-radius: 6px;
+      background: linear-gradient(to right, #71f8fc, #a0fff8);
+      border-radius: 30px;
       text-decoration: none;
+      color: black;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     footer {
       margin-top: 3rem;
       font-size: 0.85rem;
-      color: #eee;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <div class="info">
-    <h1>联系我</h1>
-    <p>📮 邮箱：sunlandccc@outlook.com</p>
-    <a class="back" href="index.html">← 返回主页</a>
+  <div class="container">
+    <h1>联系我们</h1>
+    <div class="email">📧 sunlandccc@outlook.com</div>
+    <br><a href="index.html" class="back">← 返回主页</a>
   </div>
   <footer>Copyright©️2024-2025霜蓝, All Rights Reserved.</footer>
 </body>
