@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>霜蓝的主页</title>
+  <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --theme-color: #71f8fc;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Product Sans', sans-serif;
+      background: #ffffff url('p/bg.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #1A1A1A;
+      text-align: center;
+    }
+
+    .hero {
+      padding: 3rem 1rem 1rem;
+      background-color: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      margin: 2rem auto;
+      max-width: 620px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .hero img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem auto;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    .buttons a {
+      background: linear-gradient(to right, #71f8fc, #a0fff8);
+      color: black;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+
+    .buttons a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <img src="p/tx.jpeg" alt="霜蓝头像" />
+    <h1>你好，我是霜蓝</h1>
+    <p>欢迎来到我的个人空间</p>
+    <div class="buttons">
+      <a href="shoushe.html">🐾 兽设介绍</a>
+      <a href="banquan.html">📜 版权信息</a>
+      <a href="guanzhu.html">⭐ 关注我们</a>
+      <a href="lianxi.html">✉️ 联系我们</a>
+      <a href="comment.html">💬 留言评论</a>
+    </div>
+  </div>
+  <footer>Copyright©️2024-2025霜蓝, All Rights Reserved.</footer>
+</body>
+</html>
