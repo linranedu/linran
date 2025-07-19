@@ -194,5 +194,18 @@
       }
     });
   </script>
+  <script type="module">
+  import { supabase } from './supabaseClient.js'
+
+  const loginBtn = document.getElementById('login-button')
+  loginBtn.onclick = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: {
+        redirectTo: location.origin + '/donate.html'
+      }
+    });
+  }
+  </script>
 </body>
 </html>
