@@ -5,12 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>捐赠霜蓝</title>
   <link rel="stylesheet" href="p/style.css" />
-  <script type="module" src="p/js/login.js"></script>
+  <script type="module" src="p/js/login.js" defer></script>
+  <style>
+    body {
+      background: url("p/bg.png") no-repeat center center fixed;
+      background-size: cover;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 80px auto;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+      backdrop-filter: blur(6px);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #71f8fc;
+    }
+
+    .btn, #login-btn, #logout-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      border: none;
+      background-color: #71f8fc;
+      color: #000;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover, #login-btn:hover, #logout-btn:hover {
+      background-color: #4cd8dc;
+    }
+
+    #auth-section {
+      text-align: center;
+    }
+
+    #user-info p {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .qr-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .qr-container div {
+      text-align: center;
+      margin: 10px;
+    }
+
+    .qr-container img {
+      width: 160px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(113, 248, 252, 0.6);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px 0;
+      color: #ccc;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>捐赠霜蓝</h1>
-    <p>如果你喜欢这个网站，可以选择捐赠支持我继续创作。</p>
+    <p style="text-align: center;">如果你喜欢这个网站，可以选择捐赠支持我继续创作。</p>
 
     <!-- 登录状态相关区域 -->
     <div id="auth-section">
@@ -21,7 +99,7 @@
       </div>
     </div>
 
-    <hr />
+    <hr style="margin: 30px 0; border-color: #71f8fc;" />
 
     <!-- 捐赠二维码 -->
     <div class="donation-options">
