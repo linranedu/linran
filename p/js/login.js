@@ -1,48 +1,50 @@
+// p/js/login.js
 import { supabase } from './supabaseClient.js';
 
-// 登录逻辑
+// 登录函数
 function signInWithGitHub() {
   supabase.auth.signInWithOAuth({
     provider: 'github',
     options: {
-      redirectTo: 'https://sunland-eob.pages.dev/donate.html'
+      redirectTo: window.location.origin + '/donate.html'  // 登陆后跳转回来
     }
   });
 }
 
-// 登出逻辑
-function signOut() {
-  supabase.auth.signOut().then(() => {
-    location.reload();
-  });
+// 登出函数
+async function signOut() {
+  await supabase.auth.signOut();
+  location.reload();  // 退出后刷新页面
 }
 
-// 登录状态渲染
-async function updateAuthUI() {
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
+// 检查当前登录状态并更新界面
+async function checkAuthStatus() {
+  const { data: { session } } = await supabase.auth.getSession();
 
   const loginBtn = document.getElementById('login-btn');
-  const logoutBtn = document.getElementById('logout-btn');
   const userInfo = document.getElementById('user-info');
-  const userEmailSpan = document.getElementById('user-email');
+  const userEmail = document.getElementById('user-email');
+  const logoutBtn = document.getElementById('logout-btn');
 
   if (session && session.user) {
     // 已登录
-    loginBtn.style.display = 'none';
-    userInfo.style.display = 'block';
-    userEmailSpan.textContent = session.user.email;
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (userInfo) userInfo.style.display = 'block';
+    if (userEmail) userEmail.textContent = session.user.email;
+
+    if (logoutBtn) logoutBtn.addEventListener('click', signOut);
   } else {
     // 未登录
-    loginBtn.style.display = 'block';
-    userInfo.style.display = 'none';
+    if (loginBtn) loginBtn.style.display = 'block';
+    if (userInfo) userInfo.style.display = 'none';
   }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  document.getElementById('login-btn')?.addEventListener('click', signInWithGitHub);
-  document.getElementById('logout-btn')?.addEventListener('click', signOut);
+document.addEventListener('DOMContentLoaded', () => {
+  const loginBtn = document.getElementById('login-btn');
+  if (loginBtn) {
+    loginBtn.addEventListener('click', signInWithGitHub);
+  }
 
-  await updateAuthUI();
+  checkAuthStatus();
 });
