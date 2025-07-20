@@ -1,126 +1,74 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>捐赠霜蓝</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>捐赠支持</title>
   <link rel="stylesheet" href="p/style.css" />
-  <script type="module" src="p/js/login.js" defer></script>
+  <script type="module" src="p/js/supabaseClient.js"></script>
+  <script type="module">
+    import { supabase } from './js/supabaseClient.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session) {
+        alert('请先登录才能访问捐赠页面。');
+        window.location.href = '/';  // 或者改为 index.html
+        return;
+      }
+
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+          await supabase.auth.signOut();
+          window.location.href = '/';  // 注销后跳转主页
+        });
+      }
+    });
+  </script>
   <style>
     body {
-      background: url("p/bg.png") no-repeat center center fixed;
+      background: url('p/bg.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #ffffff;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 80px auto;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-      backdrop-filter: blur(6px);
-    }
-
-    h1, h2 {
+      color: #fff;
+      font-family: "Arial", sans-serif;
       text-align: center;
-      color: #71f8fc;
+      padding: 50px;
     }
-
-    .btn, #login-btn, #logout-btn {
-      display: block;
-      margin: 20px auto;
-      padding: 12px 24px;
+    .container {
+      background-color: rgba(0,0,0,0.6);
+      padding: 2em;
+      border-radius: 1em;
+      display: inline-block;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
       border: none;
       background-color: #71f8fc;
       color: #000;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover, #login-btn:hover, #logout-btn:hover {
-      background-color: #4cd8dc;
-    }
-
-    #auth-section {
-      text-align: center;
-    }
-
-    #user-info p {
-      margin: 10px 0;
       font-weight: bold;
-    }
-
-    .qr-container {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .qr-container div {
-      text-align: center;
-      margin: 10px;
-    }
-
-    .qr-container img {
-      width: 160px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(113, 248, 252, 0.6);
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 60px;
-      padding: 20px 0;
-      color: #ccc;
-      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>捐赠霜蓝</h1>
-    <p style="text-align: center;">如果你喜欢这个网站，可以选择捐赠支持我继续创作。</p>
-
-    <!-- 登录状态相关区域 -->
-    <div id="auth-section">
-      <button id="login-btn">使用 GitHub 登录</button>
-      <div id="user-info" style="display: none;">
-        <p>已登录为：<span id="user-email"></span></p>
-        <button id="logout-btn">退出登录</button>
-      </div>
-    </div>
-
-    <hr style="margin: 30px 0; border-color: #71f8fc;" />
-
-    <!-- 捐赠二维码 -->
-    <div class="donation-options">
-      <h2>支持方式</h2>
-      <div class="qr-container">
-        <div>
-          <p>支付宝</p>
-          <img src="p/zfb.jpeg" alt="支付宝二维码" />
-        </div>
-        <div>
-          <p>微信</p>
-          <img src="p/wx.jpeg" alt="微信二维码" />
-        </div>
-      </div>
-    </div>
-
-    <a href="index.html" class="btn">返回首页</a>
+    <h1>感谢你的支持 ❤️</h1>
+    <p>你的支持是我继续创作的动力！</p>
+    <img src="https://img.shields.io/badge/WeChatPay-支持微信支付-green?logo=wechat" alt="WeChat Pay" />
+    <br/>
+    <img src="https://img.shields.io/badge/AliPay-支持支付宝-blue?logo=alipay" alt="AliPay" />
+    <br/>
+    <img src="p/bq.jpeg" alt="版权证书" style="max-width: 300px; margin-top: 1em;">
+    <br/>
+    <button id="logout-btn">退出登录</button>
   </div>
 
-  <footer>
-    <p>Copyright©️2024-2025霜蓝, All Rights Reserved.</p>
+  <footer style="margin-top: 2em; color: #ccc;">
+    Copyright©️2024-2025霜蓝, All Rights Reserved.
   </footer>
 </body>
 </html>
