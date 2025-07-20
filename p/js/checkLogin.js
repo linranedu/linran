@@ -1,26 +1,39 @@
 // checkLogin.js
-import { supabase } from './supabaseClient.js';
+import { supabase } from './supabaseClient.js'
 
-async function checkLogin() {
-  try {
-    const { data, error } = await supabase.auth.getUser();
+// 检查用户是否已登录
+async function checkLoginAndRedirect() {
+  const {
+    data: { session },
+    error
+  } = await supabase.auth.getSession()
 
-    if (error || !data.user) {
-      // 用户未登录
-      const login = confirm("您尚未登录，是否前往登录？");
-      if (login) {
-        window.location.href = "login.html"; // 替换为你的登录页面路径
-      } else {
-        window.location.href = "index.html";
-      }
+  if (error) {
+    console.error('获取会话失败:', error)
+    alert('发生错误，请稍后再试。')
+    return
+  }
+
+  if (!session) {
+    const confirmLogin = confirm('您需要登录后才能进入该页面，是否现在登录？')
+    if (confirmLogin) {
+      supabase.auth.signInWithOAuth({
+        provider: 'github',
+        options: {
+          redirectTo: 'https://sunland-eob.pages.dev/donate.html'
+        }
+      })
     } else {
-      // 用户已登录
-      console.log("用户已登录：", data.user);
+      // 用户取消登录，可以重定向回主页或不做操作
+      window.location.href = 'index.html'
     }
-  } catch (err) {
-    console.error("获取登录状态失败：", err);
-    alert("检查登录状态时出错，请稍后重试。");
+  } else {
+    console.log('已登录用户:', session.user)
+    // 如果已登录，不执行任何操作，继续显示当前页面
   }
 }
 
-document.addEventListener("DOMContentLoaded", checkLogin);
+// 页面加载时执行检查
+document.addEventListener('DOMContentLoaded', () => {
+  checkLoginAndRedirect()
+})
