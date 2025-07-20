@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="keywords" content="霜蓝,霜蓝CCC,福瑞,furry" />
   <title>霜蓝的个人主页</title>
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <meta name="keywords" content="霜蓝,霜蓝CCC,福瑞,furry" />
   <link href="https://fonts.googleapis.com/css2?family=Product+Sans&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -104,13 +104,14 @@
       color: #000;
     }
 
-    /* 模态框样式 */
     .modal {
       display: none;
       position: fixed;
       z-index: 99;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0,0,0,0.5);
     }
 
@@ -182,8 +183,10 @@
 
   <footer>Copyright©️2024-2025霜蓝, All Rights Reserved.</footer>
 
-  <!-- 登录判断脚本 -->
-  <script>
+  <!-- 登录逻辑脚本 -->
+  <script type="module">
+    import { supabase } from './p/js/supabaseClient.js';
+
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
     document.getElementById("donateBtn").addEventListener("click", () => {
@@ -193,31 +196,25 @@
         document.getElementById("loginModal").style.display = "block";
       }
     });
-  </script>
-  <script type="module">
-  import { supabase } from '.p/js/supabaseClient.js'
 
-  const loginBtn = document.getElementById('login-button')
-  loginBtn.onclick = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: location.origin + '/donate.html'
-      }
-    });
-  }
-  </script>
-  <script type="module">
-  import { supabase } from './p/js/supabaseClient.js';
+    const loginRedirectBtn = document.getElementById('loginRedirect');
+    if (loginRedirectBtn) {
+      loginRedirectBtn.addEventListener('click', async () => {
+        await supabase.auth.signInWithOAuth({
+          provider: 'github',
+          options: {
+            redirectTo: location.origin + '/donate.html'
+          }
+        });
+      });
+    }
 
-  document.getElementById('loginRedirect').addEventListener('click', async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: location.origin + '/donate.html'
-      }
-    });
-  });
-</script>
+    const { data, error } = await supabase.auth.getUser();
+    if (data.user) {
+      localStorage.setItem("isLoggedIn", "true");
+    } else {
+      localStorage.setItem("isLoggedIn", "false");
+    }
+  </script>
 </body>
 </html>
