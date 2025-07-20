@@ -4,71 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>捐赠支持</title>
-  <link rel="stylesheet" href="p/style.css" />
-  <script type="module" src="p/js/supabaseClient.js"></script>
-  <script type="module">
-    import { supabase } from './js/supabaseClient.js';
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-
-      if (!session) {
-        alert('请先登录才能访问捐赠页面。');
-        window.location.href = '/';  // 或者改为 index.html
-        return;
-      }
-
-      const logoutBtn = document.getElementById('logout-btn');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', async () => {
-          await supabase.auth.signOut();
-          window.location.href = '/';  // 注销后跳转主页
-        });
-      }
-    });
-  </script>
-  <style>
-    body {
-      background: url('p/bg.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-      font-family: "Arial", sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-    .container {
-      background-color: rgba(0,0,0,0.6);
-      padding: 2em;
-      border-radius: 1em;
-      display: inline-block;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 20px;
-      border: none;
-      background-color: #71f8fc;
-      color: #000;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="p/style.css" /> <!-- 如果你未来添加了CSS样式文件，这里会有用 -->
 </head>
 <body>
-  <div class="container">
-    <h1>感谢你的支持 ❤️</h1>
-    <p>你的支持是我继续创作的动力！</p>
-    <img src="https://img.shields.io/badge/WeChatPay-支持微信支付-green?logo=wechat" alt="WeChat Pay" />
-    <br/>
-    <img src="https://img.shields.io/badge/AliPay-支持支付宝-blue?logo=alipay" alt="AliPay" />
-    <br/>
-    <img src="p/bq.jpeg" alt="版权证书" style="max-width: 300px; margin-top: 1em;">
-    <br/>
-    <button id="logout-btn">退出登录</button>
+  <div id="donation-container" style="text-align: center; margin-top: 100px;">
+    <h1>支持我们</h1>
+    <div id="auth-content">
+      <p>正在检测登录状态...</p>
+    </div>
   </div>
 
-  <footer style="margin-top: 2em; color: #ccc;">
-    Copyright©️2024-2025霜蓝, All Rights Reserved.
-  </footer>
+  <script type="module">
+    import { supabase } from './p/js/supabaseClient.js';
+
+    const authContent = document.getElementById('auth-content');
+
+    async function checkLoginStatus() {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        authContent.innerHTML = `
+          <p>你好，${user.user_metadata.full_name || 'GitHub 用户'}！感谢你的支持！</p>
+          <button id="logout-btn">退出登录</button>
+        `;
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+          await supabase.auth.signOut();
+          location.reload();
+        });
+      } else {
+        authContent.innerHTML = `
+          <p>你需要先登录才能进行捐赠。</p>
+          <button id="login-btn">使用 GitHub 登录</button>
+        `;
+        document.getElementById('login-btn').addEventListener('click', () => {
+          supabase.auth.signInWithOAuth({
+            provider: 'github',
+            options: {
+              redirectTo: window.location.href  // 登录后回到当前页
+            }
+          });
+        });
+      }
+    }
+
+    checkLoginStatus();
+  </script>
 </body>
 </html>
