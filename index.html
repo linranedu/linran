@@ -176,7 +176,7 @@
     <div class="modal-content">
       <span class="close" onclick="document.getElementById('loginModal').style.display='none'">&times;</span>
       <p>您需要先登录后才能访问捐赠页面。</p>
-      <button onclick="window.location.href='comment.html'" class="login-button">去登录</button>
+      <button id="loginRedirect" class="login-button">使用 GitHub 登录</button>
     </div>
   </div>
 
@@ -195,7 +195,7 @@
     });
   </script>
   <script type="module">
-  import { supabase } from './supabaseClient.js'
+  import { supabase } from '.p/js/supabaseClient.js'
 
   const loginBtn = document.getElementById('login-button')
   loginBtn.onclick = async () => {
@@ -207,5 +207,17 @@
     });
   }
   </script>
+  <script type="module">
+  import { supabase } from './p/js/supabaseClient.js';
+
+  document.getElementById('loginRedirect').addEventListener('click', async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: {
+        redirectTo: location.origin + '/donate.html'
+      }
+    });
+  });
+</script>
 </body>
 </html>
