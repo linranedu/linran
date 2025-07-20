@@ -57,6 +57,21 @@
       color: #000;
       cursor: pointer;
     }
+
+    .back-button {
+      margin-top: 40px;
+      padding: 10px 20px;
+      background-color: #71f8fc;
+      color: black;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #4be0e5;
+    }
   </style>
 </head>
 <body>
@@ -79,19 +94,20 @@
         <img src="p/zfb.jpeg" alt="支付宝收款码" class="qr-code" />
       </div>
     </div>
+
+    <a href="index.html" class="back-button">← 返回主页</a>
   </div>
 
-  <script type="module" src="p/js/supabaseClient.js"></script>
-  <script type="module" src="p/js/login.js"></script>
+  <!-- JS 登录逻辑 -->
   <script type="module">
     import { supabase } from './p/js/supabaseClient.js';
 
-    async function checkSession() {
-      const { data: { session } } = await supabase.auth.getSession();
+    async function checkLoginStatus() {
+      const { data: { user } } = await supabase.auth.getUser();
       const content = document.getElementById('content');
       const popup = document.getElementById('popup');
 
-      if (session) {
+      if (user) {
         content.classList.remove('hidden');
         popup.classList.add('hidden');
       } else {
@@ -100,7 +116,19 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', checkSession);
+    // 登录按钮
+    document.addEventListener('DOMContentLoaded', async () => {
+      await checkLoginStatus();
+
+      document.getElementById('login-btn').addEventListener('click', async () => {
+        await supabase.auth.signInWithOAuth({
+          provider: 'github',
+          options: {
+            redirectTo: location.href
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
