@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>捐赠霜蓝</title>
+  <link rel="stylesheet" href="p/style.css" />
+  <script type="module" src="p/js/login.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>捐赠霜蓝</h1>
+    <p>如果你喜欢这个网站，可以选择捐赠支持我继续创作。</p>
+
+    <!-- 登录状态相关区域 -->
+    <div id="auth-section">
+      <button id="login-btn">使用 GitHub 登录</button>
+      <div id="user-info" style="display: none;">
+        <p>已登录为：<span id="user-email"></span></p>
+        <button id="logout-btn">退出登录</button>
+      </div>
+    </div>
+
+    <hr />
+
+    <!-- 捐赠二维码 -->
+    <div class="donation-options">
+      <h2>支持方式</h2>
+      <div class="qr-container">
+        <div>
+          <p>支付宝</p>
+          <img src="p/zfb.jpeg" alt="支付宝二维码" />
+        </div>
+        <div>
+          <p>微信</p>
+          <img src="p/wx.jpeg" alt="微信二维码" />
+        </div>
+      </div>
+    </div>
+
+    <a href="index.html" class="btn">返回首页</a>
+  </div>
+
+  <footer>
+    <p>Copyright©️2024-2025霜蓝, All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
